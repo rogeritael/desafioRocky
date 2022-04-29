@@ -8,13 +8,47 @@ class classDatabase{
         this.newJson = [];
     }
 
-    nameFix(){
-        this.json.map((item) => {
-            item.name;
-            console.log(item.name)
-        })
+    //função auxiliar para adicionar os dados corrigidos ao array de objetos
+    updateJson(id, name, quantity, price, category){
+        
+        this.newJson.push({
+            "id": id,
+            "name": name,
+            "quantity": quantity,
+            "price": price,
+            "category": category
+        });
     }
 
+    //corrige o erro de orografia no nome do objeto
+    nameFix(){
+        this.newJson = [];
+
+        this.json.map((item) => {
+            let newName = item.name;
+            newName = newName.replaceAll('ø', 'o');
+            newName = newName.replaceAll('æ', 'a');
+            newName = newName.replaceAll('¢', 'c');
+            newName = newName.replaceAll('ß', 'b');
+            
+            this.updateJson(
+                item.id,
+                newName,
+                item.quantity,
+                item.price,
+                item.category
+            );
+            
+        });
+
+        this.json = this.newJson;
+    }
+
+    priceFix(){
+        this.json.map((item) => {
+
+        })
+    }    
 
 
 }
@@ -22,3 +56,4 @@ class classDatabase{
 fixedDatabase = new classDatabase(database);
 // console.log(fixedDatabase.json);
 fixedDatabase.nameFix();
+console.log(fixedDatabase.json)
