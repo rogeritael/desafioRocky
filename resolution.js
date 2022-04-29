@@ -44,16 +44,53 @@ class classDatabase{
         this.json = this.newJson;
     }
 
+    //seleciona os preços que estão no formato string e passa para o formato float
     priceFix(){
-        this.json.map((item) => {
+        this.newJson = [];
 
-        })
-    }    
+        this.json.map((item) => {
+            if(typeof(item.price) == "string"){
+                item.price = parseFloat(item.price);
+            }
+            
+            this.updateJson(
+                item.id,
+                item.name,
+                item.quantity,
+                item.price,
+                item.category
+            );
+        });
+
+        this.json = this.newJson;
+    }
+    
+    //ajusta a quantidade dos produtos que deveriam ter o valor 0 mas que estão undefined
+    quantityFix(){
+        this.newJson = [];
+
+        this.json.map((item) => {
+            if(item.quantity == undefined){
+                item.quantity = 0;
+            };
+
+            this.updateJson(
+                item.id,
+                item.name,
+                item.quantity,
+                item.price,
+                item.category
+            );
+        });
+
+        this.json = this.newJson;
+    }
 
 
 }
 
 fixedDatabase = new classDatabase(database);
-// console.log(fixedDatabase.json);
 fixedDatabase.nameFix();
+fixedDatabase.priceFix();
+fixedDatabase.quantityFix();
 console.log(fixedDatabase.json)
