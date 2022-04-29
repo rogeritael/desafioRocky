@@ -1,5 +1,3 @@
-let database = require('./broken-database.json');
-
 class classDatabase{
     /* Recupera o arquivo json corrompido e coloca em uma variável para ser tratado; a variável "newJson" irá receber o arquivo já
     tratado ao concluir os devidos processos.*/
@@ -115,10 +113,10 @@ class classDatabase{
             }
         });
 
-        eletronicosTotal = eletronicosTotal.toFixed(2);
-        panelasTotal = panelasTotal.toFixed(2);
-        eletrodomesticosTotal = eletrodomesticosTotal.toFixed(2);
-        acessoriosTotal = acessoriosTotal.toFixed(2);
+        eletronicosTotal <= 0 ? eletronicosTotal = "O estoque está vazio" : eletronicosTotal = eletronicosTotal.toFixed(2);
+        panelasTotal <= 0 ? panelasTotal = "O estoque está vazio" : panelasTotal = panelasTotal.toFixed(2);
+        eletrodomesticosTotal <= 0 ? eletrodomesticosTotal = "O estoque está vazio" : eletrodomesticosTotal = eletrodomesticosTotal.toFixed(2);
+        acessoriosTotal <= 0 ? acessoriosTotal = "O estoque está vazio" : acessoriosTotal = acessoriosTotal.toFixed(2);
 
         let total = [
             {
@@ -134,24 +132,25 @@ class classDatabase{
 
     //ordena a database de forma alfabética e por id
     orderByNameAndId(){
+        let ordered = this.json.sort(function(a, b) {
+            if(a.id < b.id){
+                return -1;
+            }else{
+                return true;
+            }
+        });
 
+        ordered = ordered = this.json.sort(function(a, b) {
+            if(a.name < b.name){
+                return -1;
+            }else{
+                return true;
+            }
+        });
+
+        console.log(ordered);
     }
-
-
-
-
 
 }
 
-fixedDatabase = new classDatabase(database);
-fixedDatabase.nameFix();
-fixedDatabase.priceFix();
-fixedDatabase.quantityFix();
-
-
-console.log("Total por categoria: ");
-fixedDatabase.getTotalByCategory();
-console.log("\n \n");
-
-let Json = fixedDatabase.json;
-module.exports = Json;
+module.exports = classDatabase;
