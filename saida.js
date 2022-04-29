@@ -15,9 +15,11 @@ console.log("Database corrigida: ");
     console.log("\n \n \n");
 //imprime o valor total por categoria
 console.log("Total por categoria: ");
-    fixedDatabase.getTotalByCategory();
+    let total = fixedDatabase.getTotalByCategory();
+    console.log(total);
     console.log("\n \n \n");
 //imprime a database ordenada por nome e ID
 console.log("Database ordenada: ");
-    fixedDatabase.orderByNameAndId();
+    let orderedDB = fixedDatabase.orderByNameAndId();
+    console.log(orderedDB)
 

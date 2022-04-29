@@ -6,18 +6,6 @@ class classDatabase{
         this.newJson = [];
     }
 
-    //função auxiliar para adicionar os dados corrigidos ao array de objetos
-    updateJson(id, name, quantity, price, category){
-        
-        this.newJson.push({
-            "id": id,
-            "name": name,
-            "quantity": quantity,
-            "price": price,
-            "category": category
-        });
-    }
-
     //corrige o erro de orografia no nome do objeto
     nameFix(){
         this.newJson = [];
@@ -29,13 +17,13 @@ class classDatabase{
             newName = newName.replaceAll('¢', 'c');
             newName = newName.replaceAll('ß', 'b');
             
-            this.updateJson(
-                item.id,
-                newName,
-                item.quantity,
-                item.price,
-                item.category
-            );
+            this.newJson.push({
+                "id": item.id,
+                "name": newName,
+                "quantity": item.quantity,
+                "price": item.price,
+                "category": item.category
+            });
             
         });
 
@@ -51,13 +39,13 @@ class classDatabase{
                 item.price = parseFloat(item.price);
             }
             
-            this.updateJson(
-                item.id,
-                item.name,
-                item.quantity,
-                item.price,
-                item.category
-            );
+            this.newJson.push({
+                "id": item.id,
+                "name": item.name,
+                "quantity": item.quantity,
+                "price": item.price,
+                "category": item.category
+            });
         });
 
         this.json = this.newJson;
@@ -72,13 +60,13 @@ class classDatabase{
                 item.quantity = 0;
             };
 
-            this.updateJson(
-                item.id,
-                item.name,
-                item.quantity,
-                item.price,
-                item.category
-            );
+            this.newJson.push({
+                "id": item.id,
+                "name": item.name,
+                "quantity": item.quantity,
+                "price": item.price,
+                "category": item.category
+            });
         });
 
         this.json = this.newJson;
@@ -127,7 +115,7 @@ class classDatabase{
             }
         ];
 
-        console.log(total)
+        return total;
     }
 
     //ordena a database de forma alfabética e por id
@@ -148,7 +136,7 @@ class classDatabase{
             }
         });
 
-        console.log(ordered);
+        return ordered;
     }
 
 }
