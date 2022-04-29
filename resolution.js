@@ -86,6 +86,60 @@ class classDatabase{
         this.json = this.newJson;
     }
 
+    //retorna o valor total por categoria
+    getTotalByCategory(){
+        let acessoriosTotal = 0;
+        let eletronicosTotal = 0;
+        let eletrodomesticosTotal = 0;
+        let panelasTotal = 0;
+
+        this.json.map((item) => {
+            switch(item.category)
+            {
+                case "Acessórios":
+                    item.quantity > 0 ?
+                        acessoriosTotal += (item.quantity * item.price) : acessoriosTotal += 0;
+                    break;
+                case "Eletrodomésticos":
+                    item.quantity > 0 ?
+                        eletrodomesticosTotal += (item.quantity * item.price) : eletrodomesticosTotal += 0;
+                    break;
+                case "Panelas":
+                    item.quantity > 0 ?
+                        panelasTotal += (item.quantity * item.price) : panelasTotal += 0;
+                    break;
+                case "Eletrônicos":
+                    item.quantity > 0 ?
+                        eletronicosTotal += (item.quantity * item.price) : eletronicosTotal += 0;
+                    break;
+            }
+        });
+
+        eletronicosTotal = eletronicosTotal.toFixed(2);
+        panelasTotal = panelasTotal.toFixed(2);
+        eletrodomesticosTotal = eletrodomesticosTotal.toFixed(2);
+        acessoriosTotal = acessoriosTotal.toFixed(2);
+
+        let total = [
+            {
+                eletronicos: eletronicosTotal,
+                eletrodomesticos: eletrodomesticosTotal,
+                acessorios: acessoriosTotal,
+                panelas: panelasTotal
+            }
+        ];
+
+        console.log(total)
+    }
+
+    //ordena a database de forma alfabética e por id
+    orderByNameAndId(){
+
+    }
+
+
+
+
 
 }
 
@@ -93,4 +147,11 @@ fixedDatabase = new classDatabase(database);
 fixedDatabase.nameFix();
 fixedDatabase.priceFix();
 fixedDatabase.quantityFix();
-console.log(fixedDatabase.json)
+
+
+console.log("Total por categoria: ");
+fixedDatabase.getTotalByCategory();
+console.log("\n \n");
+
+let Json = fixedDatabase.json;
+module.exports = Json;
