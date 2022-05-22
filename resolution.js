@@ -6,7 +6,7 @@ class classDatabase{
         this.newJson = [];
     }
 
-    //corrige o erro de orografia no nome do objeto
+    //corrige o erro de ortografia no nome do objeto
     nameFix(){
         this.newJson = [];
 
@@ -51,7 +51,7 @@ class classDatabase{
         this.json = this.newJson;
     }
     
-    //ajusta a quantidade dos produtos que deveriam ter o valor 0 mas que estão undefined
+    //ajusta a quantidade dos produtos que deveriam ter o valor 0 mas que estão em undefined
     quantityFix(){
         this.newJson = [];
 
